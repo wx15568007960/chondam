@@ -96,7 +96,7 @@
     var html = '<div class="ph">' + photo + '</div><div class="body">' + tag +
       '<strong>' + esc(it.name) + '</strong><span class="desc">' + esc(it.desc) + '</span>' +
       '<span class="meta">' + spiceLabel(it.spice) + (opts.price === false ? '' : '　[価格]') + '</span></div>';
-    var cls = 'dish ' + spiceClass(it.spice);
+    var cls = 'dish reveal ' + spiceClass(it.spice);
     return opts.href
       ? '<a class="' + cls + '" href="' + opts.href + '">' + html + '</a>'
       : '<div class="' + cls + '">' + html + '</div>';
@@ -107,6 +107,51 @@
   function bindChips(container, handlers) {
     var btns = container.querySelectorAll('button');
     for (var i = 0; i < btns.length; i++) (function (i) { btns[i].addEventListener('click', handlers[i]); })(i);
+  }
+
+  // ---- Scroll reveal (also called after dynamic re-renders) ----
+  var io = null;
+  function observeReveals() {
+    var els = document.querySelectorAll('.reveal:not(.in)');
+    if (!('IntersectionObserver' in window)) {
+      for (var i = 0; i < els.length; i++) els[i].classList.add('in');
+      return;
+    }
+    if (!io) {
+      io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+        });
+      }, { threshold: 0.12 });
+    }
+    for (var j = 0; j < els.length; j++) io.observe(els[j]);
+  }
+  function markStaticReveals() {
+    var sel = '.eyebrow,.lead,h2.display,.voices figure,.access .cols>div,.page-head>*';
+    var els = document.querySelectorAll(sel);
+    for (var i = 0; i < els.length; i++) {
+      els[i].classList.add('reveal');
+      if (els[i].parentNode && els[i].parentNode.className === 'voices') els[i].style.transitionDelay = (i % 3) * 0.12 + 's';
+    }
+  }
+
+  // ---- Hero slideshow ----
+  function initHero(hero) {
+    var slides = [['samgyeop', 'サムギョプサル'], ['bibimbap', 'ビビンバ'], ['samgyetang', 'サムゲタン'], ['pajeon', 'チヂミ']];
+    hero.innerHTML = slides.map(function (s, i) {
+      return '<img src="' + imgUrl(s[0], 1400) + '" alt="' + s[1] + '（イメージ写真）" width="1400" height="1050"' + (i ? ' loading="lazy"' : '') + (i === 0 ? ' class="on"' : '') + '>';
+    }).join('') + '<span class="hero-cap" aria-hidden="true">' + slides[0][1] + '</span>';
+    var imgs = hero.querySelectorAll('img');
+    var cap = hero.querySelector('.hero-cap');
+    var idx = 0;
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) return;
+    setInterval(function () {
+      imgs[idx].classList.remove('on');
+      idx = (idx + 1) % imgs.length;
+      imgs[idx].classList.add('on');
+      cap.textContent = slides[idx][1];
+    }, 5000);
   }
 
   // ---- Status pill ----
@@ -140,6 +185,7 @@
         .sort(function (a, b) { return Math.abs(a.spice - st.spice) - Math.abs(b.spice - st.spice); })
         .slice(0, 3);
       out.innerHTML = '<div class="grid quiz-res">' + res.map(function (it) { return dishCard(it, { tag: 'おすすめ', price: false, w: 560 }); }).join('') + '</div>';
+      observeReveals();
     }
     draw();
   }
@@ -175,6 +221,7 @@
       grid.innerHTML = list.length
         ? list.map(function (it) { return dishCard(it); }).join('')
         : '<div class="empty" style="flex:1 1 100%">この条件に合う料理はありません。条件を変えてみてください。</div>';
+      observeReveals();
     }
     draw();
   }
@@ -201,7 +248,9 @@
     initPopular();
     initMenu();
     var hero = document.getElementById('hero-img');
-    if (hero) hero.innerHTML = '<img src="' + imgUrl('samgyeop', 1000) + '" alt="サムギョプサル（イメージ写真）" width="1000" height="750">';
+    if (hero) initHero(hero);
+    markStaticReveals();
+    observeReveals();
     renderCredits();
   });
 })();
