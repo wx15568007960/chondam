@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>韓国家庭料理 Chondam | 一橋学園（試用版）</title>
+<meta name="description" content="一橋学園駅徒歩1分。ご夫婦が営む韓国家庭料理のお店チョンダム。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="index.html"><b>CHONDAM</b><small>韓国家庭料理 チョンダム</small></a>
+  <nav class="nav" aria-label="メインメニュー">
+    <a href="#pick">選んでもらう</a>
+    <a href="menu.html">メニュー</a>
+    <a href="#voice">クチコミ</a>
+    <a href="#access">営業時間・アクセス</a>
+    <a class="btn btn-y" href="https://chondam.base.shop">テイクアウト</a>
+  </nav>
+</header>
+
+<main>
+<section class="wrap-wide hero">
+  <div class="hero-text">
+    <div class="status" id="status" aria-live="polite"></div>
+    <h1 class="display">今夜も、<br><span>韓国の味</span>で<br>ほっとしよう。</h1>
+    <p>ご夫婦が営む一橋学園の韓国料理店。サムギョプサル、ビビンバ、やさしい味のサムゲタン。ランチも夜も、手ごろな価格で。</p>
+    <div class="row">
+      <a class="btn btn-y" href="#pick">今日の一皿を選ぶ</a>
+      <a class="btn btn-o" href="tel:05035587733">050-3558-7733</a>
+    </div>
+  </div>
+  <div class="hero-img" id="hero-img"></div>
+</section>
+
+<div class="strip" aria-hidden="true">
+  <span>ビビンバ</span><span>サムギョプサル</span><span>プルコギ</span><span>サムゲタン</span><span>チヂミ</span><span>トッポキ</span><span>スンドゥブ</span>
+</div>
+
+<section class="wrap block" id="pick">
+  <div class="eyebrow">SELECT</div>
+  <h2 class="display">選べないときは、2問だけ。</h2>
+  <p class="lead">辛さと気分を選ぶと、おすすめの料理を3品ご案内します。</p>
+  <div id="quiz">
+    <div class="quiz-q">
+      <div><strong>1. 辛さはどのくらい？</strong><div class="chips" data-q="spice"></div></div>
+      <div><strong>2. 今日の気分は？</strong><div class="chips" data-q="cat"></div></div>
+    </div>
+    <div data-q="out"></div>
+  </div>
+</section>
+
+<section class="wrap block" id="menu">
+  <div class="eyebrow">POPULAR</div>
+  <h2 class="display">クチコミで人気の味</h2>
+  <p class="lead">Googleマップのクチコミでよく名前が挙がる料理です。</p>
+  <div class="grid" id="popular"></div>
+  <p style="margin-top:32px"><a class="btn btn-y" href="menu.html">すべてのメニューを見る</a></p>
+</section>
+
+<section class="wrap block" id="voice">
+  <div class="head-row">
+    <div>
+      <div class="eyebrow">VOICE</div>
+      <h2 class="display" style="margin-bottom:0">評価 4.6、クチコミ106件</h2>
+    </div>
+    <a href="https://maps.app.goo.gl/KxUPQpLMXTZ1aeZX6"><strong>Googleマップで写真270枚とクチコミを見る</strong></a>
+  </div>
+  <div class="voices">
+    <figure><blockquote>ご夫婦で営む、アットホームな韓国料理店。サムギョプサルとビビンバが特においしく、店内はおしゃれで落ち着く。</blockquote><figcaption>Googleクチコミより</figcaption></figure>
+    <figure><blockquote>サムゲタンは優しい味で体が温まる。スンドゥブラーメンは旨辛でちょうどよかった。</blockquote><figcaption>Googleクチコミより</figcaption></figure>
+    <figure><blockquote>麦茶の補充や取り皿の声かけが細やか。普通においしく、また来たいと思った。</blockquote><figcaption>Googleクチコミより</figcaption></figure>
+  </div>
+  <p style="margin-top:24px"><a class="btn btn-o" href="https://maps.app.goo.gl/KxUPQpLMXTZ1aeZX6">クチコミを書く</a></p>
+</section>
+</main>
+
+<section class="access" id="access">
+  <div class="wrap cols">
+    <div>
+      <h2>営業時間</h2>
+      <div class="hrow"><span>月・火・木・金・土</span><span>11:00–15:00 / 17:00–21:00</span></div>
+      <div class="hrow"><span>水・日</span><strong>定休日</strong></div>
+      <p style="margin:16px 0 0;font-size:14px">[臨時休業・祝日のお知らせ]</p>
+    </div>
+    <div>
+      <h2>一橋学園駅前店</h2>
+      <p style="margin:0 0 6px">〒187-0045 東京都小平市学園西町2-2-10 1F</p>
+      <p style="margin:0 0 20px">西武多摩湖線 一橋学園駅の改札から徒歩1分</p>
+      <div class="row">
+        <a class="btn btn-k" href="tel:05035587733">050-3558-7733</a>
+        <a class="btn btn-l" href="https://maps.app.goo.gl/KxUPQpLMXTZ1aeZX6">ルート案内</a>
+        <a class="btn btn-l" href="https://chondam.base.shop">テイクアウト注文</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p style="margin:0 0 8px">掲載の料理写真はイメージです（Wikimedia Commons の無料素材。実際の盛り付け・内容と異なる場合があります）。</p>
+  <p style="margin:0">© chondam.com　韓国家庭料理 Chondam（試用版）</p>
+</footer>
+<details class="credits">
+  <summary>写真クレジット</summary>
+  <ul id="credits-list"></ul>
+</details>
+
+</body>
+</html>
